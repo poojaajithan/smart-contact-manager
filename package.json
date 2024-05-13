@@ -1,0 +1,27 @@
+{
+  "name": "smart-contact-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poojaajithan/smart-contact-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/poojaajithan/smart-contact-manager/issues"
+  },
+  "homepage": "https://github.com/poojaajithan/smart-contact-manager#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "flowbite": "^2.3.0"
+  }
+}
