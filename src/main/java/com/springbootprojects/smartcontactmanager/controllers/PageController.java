@@ -11,7 +11,7 @@ public class PageController {
     @RequestMapping("/home")
     public String home(Model model){
         model.addAttribute("name", "Substring Technologies");
-        model.addAttribute("Youtube channel", "Learn coding with John");
+        model.addAttribute("githubrepo", "https://github.com/poojaajithan/");
         return "home";
     }
 }
