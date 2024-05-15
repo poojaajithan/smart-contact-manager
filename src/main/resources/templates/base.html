@@ -9,8 +9,22 @@
     
 </head>
 <body>
-   <section data-th-replace="${content}">
-
-   </section>
+    <ul class="p-4">
+        <li>
+            <a data-th-href="@{'/home'}">Home</a>
+        </li>
+        <li>
+            <a data-th-href="@{'/services'}">Services</a>
+        </li>
+        <li>
+            <a data-th-href="@{'/about'}">About</a>
+        </li>
+    </ul>
+   <div class="p-4">
+    <section data-th-replace="${content}"></section>
+   </div>
+   <footer class="p-4">
+    Footer : Learn Coding with SpringBoot
+   </footer>
 </body>
 </html>
