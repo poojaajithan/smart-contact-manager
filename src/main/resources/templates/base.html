@@ -5,26 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-th-replace="${title}">SCM</title>
     <link data-th-href="@{'/css/output.css'}" rel="stylesheet">
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     
 </head>
 <body>
-    <ul class="p-4">
-        <li>
-            <a data-th-href="@{'/home'}">Home</a>
-        </li>
-        <li>
-            <a data-th-href="@{'/services'}">Services</a>
-        </li>
-        <li>
-            <a data-th-href="@{'/about'}">About</a>
-        </li>
-    </ul>
+    <div data-th-replace="navbar :: navbar">
+        
+    </div>
    <div class="p-4">
     <section data-th-replace="${content}"></section>
    </div>
    <footer class="p-4">
     Footer : Learn Coding with SpringBoot
    </footer>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>
