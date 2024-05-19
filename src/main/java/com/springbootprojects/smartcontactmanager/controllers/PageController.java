@@ -2,6 +2,8 @@ package com.springbootprojects.smartcontactmanager.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 
@@ -25,5 +27,23 @@ public class PageController {
     public String servicesPage(){
         System.out.println("About services page loading.");
         return "services";
+    }
+
+    @GetMapping("/contact")
+    public String contact(){
+        System.out.println("About Contact page loading.");
+        return "contact";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        System.out.println("About Login page loading.");
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String register(){
+        System.out.println("About Signup page loading.");
+        return "register";
     }
 }
