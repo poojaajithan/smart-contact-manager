@@ -10,11 +10,22 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity(name="user")
 @Table(name="users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class User {
     
     @Id
@@ -32,16 +43,11 @@ public class User {
     private boolean enabled=false;
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
+    @Enumerated
     private Providers provider = Providers.SELF;
     private String providerUserId;
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
     private List<Contact> contacts = new ArrayList<>();
 
-    public User() {
-    }
-
-    
-   
-    
 }
