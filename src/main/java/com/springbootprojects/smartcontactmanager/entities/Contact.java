@@ -25,6 +25,10 @@ public class Contact {
     private String websiteLink;
     private String linkedinLink;
 
-    
+    @ManyToOne
+    private User user;
+
+    @OneToMany(mappedBy="contact", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+    private List<SocialLink> links = new ArrayList<>();
 
 }
