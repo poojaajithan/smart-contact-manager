@@ -1,0 +1,47 @@
+package com.springbootprojects.smartcontactmanager.entities;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Entity(name="user")
+@Table(name="users")
+public class User {
+    
+    @Id
+    @Column(name = "user_name", nullable=false)
+    private String userId;
+    private String name;
+    @Column(unique=true, nullable=false)
+    private String email;
+    private String password;
+    private String phoneNumber;
+    @Column(length=1024)
+    private String about;
+    @Column(length=1024)
+    private String profilePic;
+    private boolean enabled=false;
+    private boolean emailVerified = false;
+    private boolean phoneVerified = false;
+    private Providers provider = Providers.SELF;
+    private String providerUserId;
+
+    @OneToMany()
+    private List<Contact> contacts = new ArrayList<>();
+
+    public User() {
+    }
+
+    
+   
+    
+}
