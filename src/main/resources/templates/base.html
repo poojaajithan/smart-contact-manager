@@ -14,15 +14,12 @@
             referrerpolicy="no-referrer" />
     
 </head>
-<body>
+<body class="dark:bg-gray-900 bg-gray-100">
     <div data-th-replace="navbar :: navbar">   
     </div>
    <div class="p-4 h-screen w-full">
     <section data-th-replace="${content}"></section>
    </div>
-   <footer class="p-4">
-    Footer : Learn Coding with SpringBoot
-   </footer>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
    <script data-th-src="@{'/js/script.js'}"></script>
 </body>
