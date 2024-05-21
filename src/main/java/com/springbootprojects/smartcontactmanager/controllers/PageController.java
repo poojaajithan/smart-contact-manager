@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.springbootprojects.smartcontactmanager.services.UserService;
 import com.springbootprojects.smartcontactmanager.helpers.Message;
 import com.springbootprojects.smartcontactmanager.helpers.MessageType;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -62,13 +64,15 @@ public class PageController {
 
     // processing form
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult, HttpSession session) {
         System.out.println("Processing registration");
         // fetch form data
         System.out.println("User Form : " + userForm);
 
         // validate form data
-
+        if (rBindingResult.hasErrors()){
+            return "register";
+        }
         // save to database
         User user = new User();
         user.setName(userForm.getName());
