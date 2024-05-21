@@ -15,13 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
+import com.springbootprojects.smartcontactmanager.services.impl.SecurityCustomUserDetailService;
 
 @Configuration
 public class SecurityConfig {
 
     // create user and login using in-memory service
-    @Bean
+    /*@Bean
     public UserDetailsService userDetailsService(){
         UserDetails user1 = org.springframework.security.core.userdetails.User
                                                                             .withDefaultPasswordEncoder()
@@ -38,6 +38,21 @@ public class SecurityConfig {
         var inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user1, user2);
 
         return inMemoryUserDetailsManager;
+    }*/
 
+    @Autowired
+    SecurityCustomUserDetailService userDetailService;
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

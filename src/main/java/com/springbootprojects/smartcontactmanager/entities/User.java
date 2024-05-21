@@ -19,6 +19,10 @@ import lombok.Setter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity(name="user")
 @Table(name="users")
 @Getter
@@ -26,7 +30,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class User implements UserDetails{
     
     @Id
     @Column(name = "user_name", nullable=false)
@@ -40,14 +44,42 @@ public class User {
     private String about;
     @Column(length=1024)
     private String profilePic;
-    private boolean enabled=false;
+    private boolean enabled=true;
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
     @Enumerated(value = EnumType.STRING)
     private Providers provider = Providers.SELF;
     private String providerUserId;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roleList = new ArrayList<>();
 
     @OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
     private List<Contact> contacts = new ArrayList<>();
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // list of roles[USER,ADMIN]
+        // Collection of SimpleGrantedAuthority[roles{ADMIN,USER}]
+        return roleList.stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 }

@@ -10,7 +10,9 @@ import com.springbootprojects.smartcontactmanager.entities.User;
 import com.springbootprojects.smartcontactmanager.services.UserService;
 import com.springbootprojects.smartcontactmanager.repository.UserRepository;
 import com.springbootprojects.smartcontactmanager.exceptions.ResourceNotFoundException;
+import com.springbootprojects.smartcontactmanager.helpers.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,12 +21,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User saveUser(User user){
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
         return userRepository.save(user);
     }
 
