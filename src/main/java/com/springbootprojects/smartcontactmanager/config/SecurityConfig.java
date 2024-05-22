@@ -53,6 +53,9 @@ public class SecurityConfig {
     @Autowired
     SecurityCustomUserDetailService userDetailService;
 
+    @Autowired
+    OAuthAuthenicationSuccessHandler handler;
+
     // configuration of authentication provider for spring security (using database)
     @Bean
     public AuthenticationProvider authenticationProvider(){
@@ -98,10 +101,17 @@ public class SecurityConfig {
 			                                    Authentication authentication) throws IOException, ServletException{
                     throw new UnsupportedOperationException("Unimplemeted method on authentication success");
                 }
-            });*/
-        });
+            });*/ 
+        }); 
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable); // else logout wont work, check inside logoutUrl
+
+        // oauth configuartions
+        httpSecurity.oauth2Login(oauth -> {
+            oauth.loginPage("/login");
+            oauth.successHandler(handler);
+        });
+
         httpSecurity.logout(logoutForm -> {
             logoutForm.logoutUrl("/do-logout");
             logoutForm.logoutSuccessUrl("/login?logout=true");
