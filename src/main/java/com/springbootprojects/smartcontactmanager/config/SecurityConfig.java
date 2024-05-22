@@ -43,6 +43,7 @@ public class SecurityConfig {
     @Autowired
     SecurityCustomUserDetailService userDetailService;
 
+    // configuraiton of authentication providerfor spring security
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -54,5 +55,17 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+        //configuration
+        httpSecurity.authorizeHttpRequests((authorizeHttpRequests) -> {
+                                            //authorizeHttpRequests.requestMatchers("/home", "/register", "/services").permitAll());
+                                            authorizeHttpRequests.requestMatchers("/user/**").authenticated();
+                                            authorizeHttpRequests.anyRequest().permitAll();
+                    });
+        httpSecurity.formLogin(Customizer.withDefaults());
+        return httpSecurity.build();
     }
 }

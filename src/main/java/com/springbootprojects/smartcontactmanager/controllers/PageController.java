@@ -17,6 +17,8 @@ import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class PageController {
@@ -24,6 +26,11 @@ public class PageController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/")
+    public String index(){
+        return "redirect:/home";
+    }
+    
     @RequestMapping("/home")
     public String home(Model model) {
         model.addAttribute("name", "Substring Technologies");
