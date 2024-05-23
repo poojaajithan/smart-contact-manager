@@ -38,7 +38,6 @@ public class OAuthAuthenicationSuccessHandler implements AuthenticationSuccessHa
         
         logger.info("OAuthAuthenicationSuccessHandler");
 
-        // save into database
         DefaultOAuth2User oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
         oauthUser.getAttributes().forEach((key, value) -> {
             logger.info(key + ":" + value);
