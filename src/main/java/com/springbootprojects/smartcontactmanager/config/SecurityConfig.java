@@ -83,7 +83,7 @@ public class SecurityConfig {
         httpSecurity.formLogin(formLogin -> {
             formLogin.loginPage("/login");
             formLogin.loginProcessingUrl("/authenticate"); // This means login page is designed at login.html, but on click of submit button /authenticate needs to be invoked
-            formLogin.defaultSuccessUrl("/user/dashboard"); //TODo - check why this did not work with success default url
+            formLogin.defaultSuccessUrl("/user/profile"); //TODo - check why this did not work with success default url
             //formLogin.failureForwardUrl("/login?error=true"); // does not with incorrect creds
             formLogin.usernameParameter("email"); // look for name attribute in login.html for email
             formLogin.passwordParameter("password");
