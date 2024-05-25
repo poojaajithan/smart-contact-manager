@@ -32,7 +32,9 @@
               </p>
 
               <form
-                action=""
+                data-th-action="@{'/user/contacts/add'}" 
+                method="post"
+                data-th-object="${userForm}"
                 class="mt-8"
               >
                 <!-- name form -->

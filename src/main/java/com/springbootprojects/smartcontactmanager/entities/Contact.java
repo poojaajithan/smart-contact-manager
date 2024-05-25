@@ -31,7 +31,8 @@ public class Contact {
     private String description;
     private boolean favorite = false;
     private String websiteLink;
-    private String linkedinLink;
+    private String linkedInLink;
+    private String cloudinaryImagePublicId;
 
     @ManyToOne
     private User user;
