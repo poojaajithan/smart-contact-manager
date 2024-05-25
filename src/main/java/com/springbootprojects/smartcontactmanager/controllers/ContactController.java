@@ -15,7 +15,7 @@ import com.springbootprojects.smartcontactmanager.forms.UserForm;
 import com.springbootprojects.smartcontactmanager.helpers.Helper;
 import com.springbootprojects.smartcontactmanager.services.ContactService;
 import com.springbootprojects.smartcontactmanager.services.UserService;
-
+import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -32,12 +32,15 @@ public class ContactController {
     ContactService contactService;
 
     @RequestMapping("/add")
-    public String addContactView() {
+    public String addContactView(Model model) {
+        ContactForm contactForm = new ContactForm();
+        contactForm.setFavorite(true);
+        model.addAttribute("contactForm", contactForm);
         return "user/add_contact";
     }
 
     @RequestMapping(value ="/add", method=RequestMethod.POST)
-    public String saveContact(@ModelAttribute ContactForm contactForm, Authentication authentication, HttpSession session) {
+    public String saveContact(@ModelAttribute ContactForm contactForm, BindingResult result, Authentication authentication, HttpSession session) {
         logger.info(("Inside save contact"));
 
         String email = Helper.getEmailOfLoggedInUser(authentication);
