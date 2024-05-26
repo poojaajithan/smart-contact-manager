@@ -56,6 +56,12 @@
                       placeholder="name"
                       data-th-field="*{name}"
                     />
+                    <p  data-th-if="${#fields.hasErrors('name')}"
+                        data-th-errors="*{name}"
+                        class="text-red-600 px-1 py-2"
+                    >
+                        Name is required
+                    </p>
                   </div>
                 </div>
 
@@ -78,6 +84,12 @@
                       placeholder="example@gmail.com"
                       data-th-field="*{email}"
                     />
+                    <p  data-th-if="${#fields.hasErrors('email')}"
+                        data-th-errors="*{email}"
+                        class="text-red-600 px-1 py-2"
+                    >
+                       Email is required 
+                    </p>
                   </div>
                 </div>
 
@@ -100,6 +112,12 @@
                       placeholder="9823525525"
                       data-th-field="*{phoneNumber}"
                     />
+                    <p  data-th-if="${#fields.hasErrors('phoneNumber')}"
+                        data-th-errors="*{phoneNumber}"
+                        class="text-red-600 px-1 py-2"
+                    >
+                        Phone number is required
+                    </p>
                   </div>
                 </div>
 
@@ -117,6 +135,12 @@
                     placeholder="Address of the contact"
                     data-th-field="*{address}"
                   ></textarea>
+                  <p  data-th-if="${#fields.hasErrors('address')}"
+                        data-th-errors="*{address}"
+                        class="text-red-600 px-1 py-2"
+                    >
+                        Address is required
+                    </p>
                 </div>
 
                 <!-- description -->

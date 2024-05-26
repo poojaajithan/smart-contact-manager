@@ -11,4 +11,5 @@ public interface ContactService {
     Optional<Contact> updateContact(Contact user);
     void deleteContact(String id);
     List<Contact> getAllContacts();
+    List<Contact> getByUserId(String userId);
 }

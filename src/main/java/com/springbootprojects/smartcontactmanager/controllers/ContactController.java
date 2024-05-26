@@ -41,8 +41,9 @@ public class ContactController {
 
     @RequestMapping(value ="/add", method=RequestMethod.POST)
     public String saveContact(@ModelAttribute ContactForm contactForm, BindingResult result, Authentication authentication, HttpSession session) {
-        logger.info(("Inside save contact"));
-
+        if (result.hasErrors()){
+            return "user/add_contact";
+        }
         String email = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(email);
 
@@ -58,7 +59,8 @@ public class ContactController {
         contact.setUser(user);
         
         contactService.saveContact(contact);
-        return "user/add_contact";
+        
+        return "redirect:/user/contacts/add";
     }
     
 }

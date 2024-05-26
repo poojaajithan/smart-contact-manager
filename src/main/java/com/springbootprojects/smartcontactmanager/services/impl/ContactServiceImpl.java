@@ -47,4 +47,9 @@ public class ContactServiceImpl implements ContactService{
         return contactRepository.findAll();
     }
 
+    @Override
+    public List<Contact> getByUserId(String userId) {
+        return contactRepository.findByUserId(userId);
+    }
+
 }
