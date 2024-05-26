@@ -23,8 +23,9 @@
             <div
               class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
+             <!--To display message on top which was set in Controller into the session-->
               <div data-th-replace="message::messagebox"></div>
-
+              
               <h1 class="text-2xl font-semibold">Add New Contact</h1>
               <p class="text-gray-500">
                 This contact will be stored on cloud, you can direct email this
@@ -56,13 +57,14 @@
                       placeholder="name"
                       data-th-field="*{name}"
                     />
-                    <p  data-th-if="${#fields.hasErrors('name')}"
-                        data-th-errors="*{name}"
-                        class="text-red-600 px-1 py-2"
-                    >
-                        Name is required
-                    </p>
                   </div>
+                  <p  
+                    data-th-if="${#fields.hasErrors('name')}"
+                    data-th-errors="*{name}"
+                    class="text-red-600"
+                    >
+                  Name is required
+              </p>
                 </div>
 
                 <!-- email form -->
@@ -84,13 +86,13 @@
                       placeholder="example@gmail.com"
                       data-th-field="*{email}"
                     />
-                    <p  data-th-if="${#fields.hasErrors('email')}"
+                  </div>
+                  <p  data-th-if="${#fields.hasErrors('email')}"
                         data-th-errors="*{email}"
-                        class="text-red-600 px-1 py-2"
+                        class="text-red-600"
                     >
                        Email is required 
-                    </p>
-                  </div>
+                  </p>
                 </div>
 
                 <!-- phone number  -->
@@ -112,13 +114,13 @@
                       placeholder="9823525525"
                       data-th-field="*{phoneNumber}"
                     />
-                    <p  data-th-if="${#fields.hasErrors('phoneNumber')}"
+                  </div>
+                  <p  data-th-if="${#fields.hasErrors('phoneNumber')}"
                         data-th-errors="*{phoneNumber}"
-                        class="text-red-600 px-1 py-2"
+                        class="text-red-600"
                     >
                         Phone number is required
                     </p>
-                  </div>
                 </div>
 
                 <!-- address -->
@@ -135,9 +137,10 @@
                     placeholder="Address of the contact"
                     data-th-field="*{address}"
                   ></textarea>
-                  <p  data-th-if="${#fields.hasErrors('address')}"
+                  <p  
+		  	            data-th-if="${#fields.hasErrors('address')}"
                         data-th-errors="*{address}"
-                        class="text-red-600 px-1 py-2"
+                        class="text-red-500"
                     >
                         Address is required
                     </p>
@@ -212,6 +215,13 @@
                     data-th-field="*{contactImage}"
                   />
 
+                 <!-- <p
+                    class="text-red-500"
+                    data-th-if="${#fields.hasErrors('contactImage')}"
+                    data-th-errors="*{contactImage}"
+                  >
+                    Invalid Image
+                  </p>-->
 
                   <img
                     class="max-h-52 mx-auto rounded-lg shadow m-3"

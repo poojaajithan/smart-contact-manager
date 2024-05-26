@@ -1,5 +1,6 @@
 package com.springbootprojects.smartcontactmanager.services.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,7 +50,8 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public List<Contact> getByUserId(String userId) {
-        return contactRepository.findByUserId(userId);
+        return Collections.EMPTY_LIST;
+        //return contactRepository.findByUserId(userId);
     }
 
 }

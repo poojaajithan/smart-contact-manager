@@ -13,6 +13,8 @@ import com.springbootprojects.smartcontactmanager.entities.User;
 import com.springbootprojects.smartcontactmanager.forms.ContactForm;
 import com.springbootprojects.smartcontactmanager.forms.UserForm;
 import com.springbootprojects.smartcontactmanager.helpers.Helper;
+import com.springbootprojects.smartcontactmanager.helpers.Message;
+import com.springbootprojects.smartcontactmanager.helpers.MessageType;
 import com.springbootprojects.smartcontactmanager.services.ContactService;
 import com.springbootprojects.smartcontactmanager.services.UserService;
 import org.springframework.ui.Model;
@@ -40,10 +42,17 @@ public class ContactController {
     }
 
     @RequestMapping(value ="/add", method=RequestMethod.POST)
-    public String saveContact(@ModelAttribute ContactForm contactForm, BindingResult result, Authentication authentication, HttpSession session) {
+    public String saveContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult result, 
+                                Authentication authentication, HttpSession session) {
+        
         if (result.hasErrors()){
+            session.setAttribute("message", Message.builder()
+                                                        .content("Please correct the following errors")
+                                                        .type(MessageType.red)
+                                                        .build());
             return "user/add_contact";
         }
+
         String email = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(email);
 
@@ -59,7 +68,11 @@ public class ContactController {
         contact.setUser(user);
         
         contactService.saveContact(contact);
-        
+
+        session.setAttribute("message", Message.builder()
+                                                    .content("You have successfully added a new contact")
+                                                    .type(MessageType.green)
+                                                    .build());
         return "redirect:/user/contacts/add";
     }
     
